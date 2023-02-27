@@ -1,0 +1,73 @@
+\documentclass[uplatex, dvipdfmx, a4paper, 10pt]{jsarticle}
+\usepackage{graphicx}
+\usepackage[a4paper]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb, amsthm, mathtools}
+\usepackage[uplatex, deluxe, bold]{otf}
+\usepackage{tikz}
+\usetikzlibrary{intersections, calc, arrows.meta, angles, quotes, shapes.callouts}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepackage{fancyhdr}
+\usepackage{newtxmath}
+\let\widering\relax
+\usepackage{fouriernc}
+% \usepackage[scale=1]{tgschola}
+\usepackage[e]{esvect}
+\usepackage{esint}
+\usepackage{tabularx, booktabs}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{bm}
+\usepackage{ascmac}
+
+\setlength{\textheight}{\paperheight}
+\setlength{\topmargin}{15truemm}
+\addtolength{\textheight}{-\topmargin}
+\addtolength{\textheight}{-\topmargin}
+\addtolength{\topmargin}{-1truein}
+\addtolength{\topmargin}{-\headheight}
+\addtolength{\topmargin}{-\headsep}
+
+\setlength{\textwidth}{\paperwidth}
+\setlength{\oddsidemargin}{15truemm}
+\addtolength{\textwidth}{-\oddsidemargin}
+\addtolength{\textwidth}{-\oddsidemargin}
+\addtolength{\oddsidemargin}{-1truein}
+\setlength{\evensidemargin}{\oddsidemargin}
+
+\renewcommand{\sfdefault}{phv}
+
+\renewcommand{\gt}[1]{\textgt{\textbf{#1}}}
+\renewcommand{\sf}[1]{\textsf{#1}}
+
+\newcommand{\ctext}[1]{\raisebox{0.2ex}{\textcircled{\raisebox{-0.12ex}{\small{#1}}}}}
+
+\setlength\normallineskiplimit{5pt}
+\setlength\normallineskip{5pt}
+
+\renewcommand{\headrulewidth}{0pt}
+% \renewcommand{\footrulewidth}{0.1pt}
+
+\renewcommand\kanjifamilydefault{\gtdefault}
+\renewcommand\familydefault{\sfdefault}
+
+\newcommand{\easy}{\colorbox[rgb]{0.95,0.95,0.95}{\small 易}}
+\newcommand{\medium}{\colorbox[rgb]{0.6,0.6,0.6}{\small 中}}
+\newcommand{\hard}{\colorbox[rgb]{0.2,0.2,0.2}{\color{white}{\small 難}}}
+\newcommand{\corr}{○}
+\newcommand{\fail}{×}
+
+\definecolor{mygray}{rgb}{0.7,0.7,0.7}
+\renewcommand{\mit}{\hangindent = 1zw $\bullet$\hspace*{0.4em}}
+
+\begin{document}
+
+\pagestyle{fancy}
+\cfoot{}
+
+\parindent = 0pt
+
+
+
+\end{document}

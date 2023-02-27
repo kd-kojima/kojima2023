@@ -1,0 +1,457 @@
+\documentclass[uplatex, dvipdfmx, a4paper, 10pt]{jsarticle}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb, amsthm, mathtools}
+\usepackage[uplatex, deluxe, bold]{otf}
+
+\usepackage[noalphabet, unicode]{pxchfon}
+\setminchofont[0]{YuMincho.ttc}
+\setgothicfont[0]{YuGo-Medium.otf}
+\setboldgothicfont[0]{YuGo-Bold.otf}
+\setxboldgothicfont[0]{YuGo-Bold.otf}
+
+\usepackage{tikz}
+\usetikzlibrary{intersections, calc, arrows.meta, angles, quotes, shapes.callouts}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepackage{fancyhdr}
+\usepackage{newtxmath}
+\let\widering\relax
+\usepackage{fouriernc}
+% \usepackage[scale=1]{tgschola}
+\usepackage[e]{esvect}
+\usepackage{esint}
+\usepackage{tabularx, booktabs}
+\usepackage{dcolumn}
+\usepackage{bm}
+
+\usepackage{pxrubrica}
+\kentenmarkintate{bullet}
+
+\setlength{\textheight}{\paperheight}
+\setlength{\topmargin}{20truemm}
+\addtolength{\textheight}{-\topmargin}
+\addtolength{\textheight}{-\topmargin}
+\addtolength{\topmargin}{-1truein}
+\addtolength{\topmargin}{-\headheight}
+\addtolength{\topmargin}{-\headsep}
+
+\setlength{\textwidth}{\paperwidth}
+\setlength{\oddsidemargin}{20truemm}
+\addtolength{\textwidth}{-\oddsidemargin}
+\addtolength{\textwidth}{-\oddsidemargin}
+\addtolength{\oddsidemargin}{-1truein}
+\setlength{\evensidemargin}{\oddsidemargin}
+
+% \newcolumntype{C}{>{\centering\arraybackslash}X}
+% \newcolumntype{L}{>{\raggedright\arraybackslash}X}
+% \newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+
+\renewcommand{\sfdefault}{phv}
+
+\renewcommand{\gt}[1]{\textgt{\textbf{#1}}}
+\renewcommand{\sf}[1]{\textsf{#1}}
+
+% \renewcommand\UrlFont{\rmfamily}
+\newcommand{\vs}{\vspace{\baselineskip}}
+\renewcommand{\t}[1]{(#1)\hspace*{1em}}
+\newcommand{\mvv}[1]{\vv{\mathstrut #1}}
+\newcommand{\mbar}[1]{\overline{\mathstrut #1}}
+\newcommand{\mabs}[1]{\raisebox{-1.2pt}{\scalebox{0.6}[1.4]{|}}#1\raisebox{-1.2pt}{\scalebox{0.6}[1.4]{|}}}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\mg}{\scalebox{1.13}[1]{$\varg$}\hspace*{1pt}}
+\newcommand{\hang}[1]{\settowidth{\hangindent}{#1}#1}
+\newcommand{\prll}{\:\,/\!\:\!/\:\,}
+\renewcommand{\sim}{∽\hspace*{-0.01pt}\:}
+\DeclareMathOperator*{\msum}{\text{\Large \raisebox{-2pt}{$\Sigma$}}}
+
+\makeatletter
+\DeclareFontFamily{U}{tipa}{}
+\DeclareFontShape{U}{tipa}{m}{n}{<->tipa10}{}
+\newcommand{\arc@char}{{\usefont{U}{tipa}{m}{n}\symbol{62}}}%
+\newcommand{\arc}[1]{\mathpalette\arc@arc{#1}}
+\newcommand{\arc@arc}[2]{%
+  \sbox0{$\m@th#1#2$}%
+  \vbox{
+    \hbox{\resizebox{\wd0}{\height}{\arc@char}}
+    \nointerlineskip
+    \box0
+  }%
+}
+\makeatother
+
+\newcommand{\ctext}[1]{\raisebox{0.2ex}{\textcircled{\raisebox{-0.12ex}{\small{#1}}}}}
+
+\newcommand{\toi}{\stepcounter{toicnt}\noindent(\thetoicnt)\hspace*{1em}\setcounter{subtoicnt}{0}}
+\newcommand{\subtoi}{\stepcounter{subtoicnt}(\thesubtoicnt)\hspace*{1em}\setcounter{subsubtoicnt}{0}}
+\newcommand{\subsubtoi}{\stepcounter{subsubtoicnt}\ctext{\thesubsubtoicnt}\hspace*{1em}}
+
+
+\newcommand{\romani}{$\rm \hspace{.18em}i\hspace{.18em}$}
+\newcommand{\romanii}{$\rm \hspace{.08em}ii\hspace{.08em}$}
+\newcommand{\romaniii}{$\rm i\hspace{-.08em}i\hspace{-.08em}i$}
+\newcommand{\romaniv}{$\rm i\hspace{-.08em}v\hspace{-.06em}$}
+\newcommand{\romanv}{$\rm \hspace{.06em}v\hspace{.06em}$}
+\newcommand{\romanvi}{$\rm \hspace{-.06em}v\hspace{-.08em}i$}
+\newcommand{\romanI}{$\rm \:\,I\:\,$}
+\newcommand{\romanII}{$\rm \;\!I\hspace{-.08em}I\;\!$}
+\newcommand{\romanIII}{$\rm I\hspace{-.15em}I\hspace{-.15em}I$}
+
+\newcommand{\atoe}{\gt{ア}～\gt{エ}}
+\newcommand{\atoo}{\gt{ア}～\gt{オ}}
+\newcommand{\atoka}{\gt{ア}～\gt{カ}}
+
+\newcommand{\choicefour}[4]{%
+    \noindent\hskip2zw\gt{ア}\hskip1zw #1\par%
+    \noindent\hskip2zw\gt{イ}\hskip1zw #2\par%
+    \noindent\hskip2zw\gt{ウ}\hskip1zw #3\par%
+    \noindent\hskip2zw\gt{エ}\hskip1zw #4\par%
+}
+\newcommand{\choicefive}[5]{%
+    \noindent\hskip2zw\gt{ア}\hskip1zw #1\par%
+    \noindent\hskip2zw\gt{イ}\hskip1zw #2\par%
+    \noindent\hskip2zw\gt{ウ}\hskip1zw #3\par%
+    \noindent\hskip2zw\gt{エ}\hskip1zw #4\par%
+    \noindent\hskip2zw\gt{オ}\hskip1zw #5\par%
+}
+\newcommand{\choicesix}[6]{%
+    \noindent\hskip2zw\gt{ア}\hskip1zw #1\par%
+    \noindent\hskip2zw\gt{イ}\hskip1zw #2\par%
+    \noindent\hskip2zw\gt{ウ}\hskip1zw #3\par%
+    \noindent\hskip2zw\gt{エ}\hskip1zw #4\par%
+    \noindent\hskip2zw\gt{オ}\hskip1zw #5\par%
+    \noindent\hskip2zw\gt{カ}\hskip1zw #6\par%
+}
+
+\newcommand{\attr}[4][]{%
+    \vs\vs
+    % {\scriptsize\begin{tabular}[h]{|c|c|c|l|}
+    %     \hline
+    %     A1 & A2 & A3 & 備考\\\hline
+    %     #2 & #3 & #4 & #1\\\hline
+    % \end{tabular}}\par
+}
+\newcommand{\ans}{\par\vs\vs\noindent\rightline{\underline{（答\thetoicnt）\hspace*{15zw}}}\par}
+
+\setlength\normallineskiplimit{6pt}
+\setlength\normallineskip{6pt}
+
+% \renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{1pt}
+
+\begin{document}
+
+\newcounter{toicnt}
+\newcounter{subtoicnt}
+\newcounter{subsubtoicnt}
+\setcounter{toicnt}{0}
+
+\pagestyle{fancy}
+\lhead{}
+\cfoot{\thepage}
+\vspace*{10\baselineskip}
+\begin{center}
+    \noindent{\LARGE\gt{関　　数}}\par\vs
+    \noindent{\Large\gt{学習状況診断テスト}}\par \vs
+    \noindent{\Large\gt{第 \sf{3} 回}}\par \vs
+    \vspace*{3\baselineskip}
+    \noindent\begin{tabularx}{0.8\linewidth}{X}
+        \toprule
+        このテストは，「関数」に関する学習状況を診断して，今後の勉強に活かすためのものです。このテストの結果が成績や評価に関係することはありませんが，今後の勉強に役立つアドバイスがもらえるよう，真剣に取り組んでください。\\
+        問題は全部で14問あります。テストは20分で取り組んでください。わからない問題は後回しにして，\underline{最後の問題まで考えるようにしましょう。}\\
+        \toprule
+    \end{tabularx}\par 
+    \vspace*{10\baselineskip}
+    \noindent\underline{\Large\gt{生徒個人番号}\hspace*{20zw}}
+\end{center}
+
+\newpage
+\vspace*{10zw}
+\newpage
+% \parindent = 0pt
+\lhead{関数 $-$ 学習状況診断テスト}
+
+%
+% === 1 ====
+%
+\attr{1}{0}{0}
+\toi 一次関数 $y=3x+2$ において，$y=4$ であるとき，$x$ を求めてください。\par\vs\vs\vs
+\ans
+\par\vs 
+
+%
+% === 2 ===
+%
+\attr{1}{0}{0}
+\toi 一次関数において，$x=-2$ のとき $y=2$，$x=3$ のとき $y=12$ である。このとき，$y$ を $x$ の式で表してください。\par\vs\vs\vs
+\ans
+\par\vs 
+
+%
+% === 3 ===
+%
+\attr{0}{1}{0}
+\toi 3つの数量 $a$，$b$，$c$ がある。$b$ は $a$ の関数であり，$c$ は $b$ の関数である。この2つの関数について，関数の定義をもとに，\gt{\kenten{必ずしも正しいといえないもの}}を次の\atoe のうちから\gt{\kenten{一つ}}選んでください。\par\vs
+\choicefour{
+    $c$ の値を決めると，$b$ の値がただ一つに定まる。}{
+    $a$ の値を決めると，$c$ の値がただ一つに定まる。}{
+    $b$ の値を決めると，$c$ の値がただ一つに定まる。}{
+    $a$ の値を決めると，$b$ の値がただ一つに定まる。
+}
+\ans
+\par\vs 
+
+%
+% === 4 ===
+%
+\attr{1}{0}{0}
+\toi 一次関数 $y=3x-2$ において，$y$ が $t$ であるとき，$x$ を $t$ を用いて表してください。\par\vs\vs\vs
+\ans
+\par\newpage
+
+%
+% === 5 ===
+%
+\attr{0}{0}{1}
+\noindent
+\begin{minipage}{0.55\linewidth}
+    \toi 右の図に，一次関数のグラフがかかれている。この一次関数の\gt{\kenten{切片}}を答えてください。\par\vs\vs\vs
+    \ans
+\end{minipage}\hspace*{4zw}
+\begin{minipage}{0.4\linewidth}
+    \begin{tikzpicture}[x=5mm, y=5mm]
+        \draw (-5,0)--(5,0) node[right]{$x$}; \draw (0,-6)--(0,4) node[above]{$y$}; \draw (0,0) node[below right]{O};
+        \draw[semithick, samples=100, domain=-3:2] plot(\x, -2*\x - 2);
+        \draw (0,-2) node[right]{$-2$};
+        \draw (-1.3,0) node[below]{$-1$};
+    \end{tikzpicture}
+\end{minipage}
+\par\vs 
+
+%
+% === 6 ===
+%
+\attr{0}{0}{1}
+\noindent
+\begin{minipage}{0.55\linewidth}
+    \toi 右の図に，一次関数のグラフがかかれている。この一次関数の\gt{\kenten{傾き}}を答えてください。\par\vs\vs\vs
+    \ans
+\end{minipage}\hspace*{4zw}
+\begin{minipage}{0.4\linewidth}
+    \begin{tikzpicture}[x=5mm, y=5mm]
+        \draw (-5,0)--(5,0) node[right]{$x$}; \draw (0,-4)--(0,6) node[above]{$y$}; \draw (0,0) node[below left]{O};
+        \draw[semithick, samples=100, domain=-5:1.5] plot(\x, 4*\x/3 + 4);
+        \draw (0,4) node[right]{$4$};
+        \draw (-2.8,0) node[below]{$-3$};
+    \end{tikzpicture}
+\end{minipage}
+\par\vs 
+
+%
+% === 7 ===
+%
+\attr{0}{1}{1}
+\noindent
+\begin{minipage}{0.6\linewidth}
+    \toi 右の図は，ある関数のグラフをかいたものである。この関数について，\gt{\kenten{誤っているもの}}を次の\atoe のうちから\gt{\kenten{一つ}}選んでください。\par\vs
+
+    \choicefour{
+        $x=-2$ のとき，$y=-1$ である。}{
+        $x$ の値を一つ決めると，$y$ の値もただ一つに定まる。}{    
+        $x$ の値が増加するとき，$y$ の値も必ず増加する。}{
+        $0 \leqq x \leqq 2$ の範囲では，$y$ の値は必ず正である。
+    }
+    \ans
+\end{minipage}\hspace*{2.5zw}
+\begin{minipage}{0.35\linewidth}
+    \begin{tikzpicture}[x=6.5mm, y=6.5mm]
+        \draw (-4,0)--(4,0) node[right]{$x$}; \draw (0,-3)--(0,5) node[above]{$y$}; \draw (0,0) node[below right]{O};
+        \draw[semithick, samples=100, domain=-3.52:3.52] plot(\x, -\x*\x*\x/4 + 2*\x + 1);
+        \draw (0,1) node[right]{$1$}; \draw (-2,0) node[above]{$-2$}; \draw (0,-1) node[right]{$-1$};
+        \draw (2,0) node[below]{$2$}; \draw (0,3) node[left]{$3$};
+        \fill (-2,-1) circle (2pt); \fill (2,3) circle (2pt);
+        \draw[dashed] (-2,-1)--(-2,0); \draw[dashed] (-2,-1)--(0,-1); \draw[dashed] (2,3)--(2,0); \draw[dashed] (2,3)--(0,3);
+    \end{tikzpicture}
+\end{minipage}
+\par\vs\vs
+\par\newpage 
+
+%
+% === 8 ===
+%
+\attr{0}{0}{1}
+\noindent
+\begin{minipage}{0.55\linewidth}
+    \toi 右の図には，反比例 $y=\dfrac{3}{x}$ のグラフと，比例 $y=-2x-2$ のグラフがかかれている。$y=\dfrac{3}{x}$ 上に点 $\mathrm{A(3,\ 1)}$，$y=-2x-2$ 上に点 $\mathrm{B\left(-\dfrac{3}{2},\ 1\right)}$ をとるとき，線分ABの長さを求めてください。\par 
+    ただし，原点Oから点 $(0,\ 1)$ および原点Oから点 $(1,\ 0)$ の長さを1cmとする。\par\vs\vs
+    \ans
+\end{minipage}\hspace*{4zw}
+\begin{minipage}{0.4\linewidth}
+    \begin{tikzpicture}[x=6mm, y=6mm]
+        \draw (-4,0)--(5,0) node[right]{$x$}; \draw (0,-3)--(0,6) node[above]{$y$}; \draw (0,0) node[below right]{O};
+        \draw[semithick, domain=-3.8:0.5] plot(\x, -2*\x - 2);
+        \draw[semithick, samples=100, domain=-4:-1] plot(\x, 3/\x);
+        \draw[semithick, samples=100, domain=0.5:5] plot(\x, 3/\x);
+        \fill (3,1) circle (2pt) node at (3,1)[above]{A};
+        \fill (-1.5,1) circle (2pt) node at (-1.5,1)[left]{B};
+    \end{tikzpicture}
+\end{minipage}
+\par\vs
+
+%
+% === 9 ===
+%
+\attr{1}{0}{1}
+\begin{minipage}{0.55\linewidth}
+    \toi 右の図の2つのグラフの交点の座標を求めてください。\par\vs\vs\vs\vs\vs\vs\vs
+    \rightline{\underline{（答\thetoicnt）\hspace*{1zw}{\LARGE(\hspace*{4zw},\hspace*{4zw})}\hspace*{2zw}}}\par
+\end{minipage}\hspace*{4zw}
+\begin{minipage}{0.4\linewidth}
+    \begin{tikzpicture}[x=6.5mm, y=6.5mm]
+        \draw (-2,0)--(6,0) node[right]{$x$}; \draw (0,-5)--(0,3) node[above]{$y$}; \draw (0,0) node[below right]{O};
+        \draw[semithick, samples=100, domain=-1.8:5.8] plot(\x, \x/3);
+        \draw[semithick, samples=100, domain=-0.7:5.2] plot(\x, 4*\x/3-4);
+        \draw (0,-4) node[right]{$-4$}; \draw (3.1,0) node[below]{3};
+        \fill (3,1) circle (2pt) node at (3,1)[above]{$(3,\ 1)$};
+    \end{tikzpicture}
+\end{minipage}\par
+
+%
+% === 10 ===
+%
+\attr{1}{0}{1}
+\noindent\begin{minipage}{0.5\linewidth}
+    \toi 右の図のように，直線 $y=\dfrac{4}{3}x+1$ と直線 $y=\dfrac{1}{2}x$ がある。$x$ 軸上に点Pをとり，Pを通り $y$ 軸に平行な直線と，直線 $y=\dfrac{4}{3}x+1$，直線 $y=\dfrac{1}{2}x$ との交点をそれぞれ点A，Bとする。線分ABの長さが $3$ となるときの点Pの $x$ 座標を求めてください。\par 
+    ただし，点Pの $x$ 座標を $t$ とおき，ABの長さに関する方程式を立てることによって求めること。\par 
+    また，点Pの $x$ 座標は正とする。\par \vs\vs
+\end{minipage}\hspace*{3zw}
+\begin{minipage}{0.45\linewidth}
+    \begin{tikzpicture}[x=4mm, y=4mm]
+        \draw (-4,0)--(12,0) node[right]{$x$}; \draw (0,-4)--(0,12) node[above]{$y$}; \draw (0,0) node[below right]{O};
+        \draw[semithick, samples=100, domain=-3.7:8.2] plot(\x, 4*\x/3+1) node[above right]{$y=\dfrac{4}{3}x+1$};
+        \draw[semithick, samples=100, domain=-4:12] plot(\x, \x/2) node[below]{$y=\dfrac{1}{2}x$};
+        \draw (3,11)--(3,-3);
+        \draw (3,0) node[below right]{$\mathrm{P}(t,\ 0)$}; \draw (3,1.8) node[below right]{B}; \draw (3,5) node[right]{A};
+    \end{tikzpicture}
+\end{minipage}\par\vs\vs\vs\ans
+
+%
+% === 11 ===
+%
+\attr{0}{1}{0}
+\toi 次の\gt{文章}について，正しい記述を\atoe のうちから\gt{\kenten{一つ}}選んでください。\par\vs
+\noindent\gt{文章}\hspace*{1zw}
+\fbox{\parbox{0.92\linewidth}{
+    AさんとBさんが15時00分に家を出ました。Aさんは分速60mで，Bさんは分速70mで歩いています。Aさんの忘れ物に気づいたCさんは，15時04分に家を出て分速100mで走ってAさんを追いかけました。CさんはAさんに15時10分に追いつきました。
+}}\par\vs
+\choicefour{
+    「Aさんの歩く速さ」と「CさんがAさんに追いつく時刻」は\gt{関数関係にない}。}{
+    「CさんがAさんに追いつく時刻」と「Cさんが家を出る時刻」は\gt{関数関係にない}。}{
+    「Bさんの歩く速さ」と「CさんがAさんに追いつく時刻」は\gt{関数関係にない}。}{
+    「CさんがAさんに追いつく時刻」と「Cさんの走る速さ」は\gt{関数関係にない}。
+}
+\ans\par
+\par 
+
+%
+% === 12 ===
+%
+\attr{1}{1}{0}
+\toi 次の\gt{文章}中の2つの数量を選び，関数関係を式に表してください。\par 
+ただし，\gt{例}を参考に，2つの数量は\atoe のうちから記号で選び，どの数量を文字 $x$，$y$ としたか示したうえで，$y$ を $x$ の式で表してください。\par 
+また，正答は複数個あり，そのうちのいずれを答えても正解です。\par\vs
+\gt{例}\hspace*{1zw}
+\fbox{\parbox{0.92\linewidth}{
+    \gt{文章}\hspace*{1zw}\fbox{Aさんは分速80mで5分歩くと，400m進みました。}\\
+    \hspace*{2zw}\gt{ア}　歩いた速さ\\
+    \hspace*{2zw}\gt{イ}　歩いた時間\\
+    \hspace*{2zw}\gt{ウ}　歩いた距離\\\hrulefill\\
+    \gt{解答}\hspace*{2zw}\underline{$x$：\gt{イ}，$y$：\gt{ウ}，関係式：$y = 80x$}\\
+    \hspace*{4zw}※ \underline{$x$：\gt{イ}，$y$：\gt{ア}，関係式：$y = \dfrac{400}{x}$} や \underline{$x$：\gt{ア}，$y$：\gt{ウ}，関係式：$y = 5x$} なども正解です。
+}}\par\vs
+\noindent\gt{文章}\hspace*{1zw}\fbox{\parbox{0.92\linewidth}{
+    歯数15の歯車Sと歯数30の歯車Tがかみ合って回転するとき，歯車Tが1回転すると歯車Sは2回転します。また，歯車Sと歯数10の歯車Uがかみ合って回転するとき，歯車Uが1回転すると歯車Sは $\dfrac{2}{3}$ 回転します。
+}}\par\vs
+\choicefour{歯車Sの歯数}{歯車Tの回転数}{歯車Uの回転数}{歯車Uの歯数}\par\vs\vs
+\rightline{\underline{（答\thetoicnt） $x$：\hspace*{7zw} $y$：\hspace*{7zw}関係式：\hspace*{15zw}}}\par\vspace*{.5em}
+\newpage
+
+%
+% === 13 ===
+%
+\attr{0}{0}{1}
+\toi 傾き $a$ を $a > 1$ の範囲で決定したとき，一次関数 $y = ax - 1$ のグラフはどのようにかけるか。次の\atoe のうちから\gt{\kenten{一つ}}選んでください。\par 
+ただし，点線は $y=-x - 1$ および $y=x-1$ のグラフである。
+\begin{table}[h]
+    \begin{tabular}{|c|c||c|c|}
+        \hline
+        \begin{tikzpicture}[x=5mm, y=5mm]\draw(0,5)node{};\draw(0,-5)node{};\draw(0,0)node{\gt{ア}};\end{tikzpicture} &
+        \begin{tikzpicture}[x=5mm, y=5mm]
+            \draw (-5,0)--(5,0) node[right]{$x$}; \draw (0,-5)--(0,5) node[above]{$y$}; \draw (0,0) node[above left]{O};
+            \draw[samples=100, domain=-4.7:3.7, dashed] plot(\x, -\x-1);
+            \draw[samples=100, domain=-3.7:4.7, dashed] plot(\x, \x-1);
+            \draw[semithick, samples=100, domain=-5:5] plot(\x, -\x/2-1);
+        \end{tikzpicture} &
+        \begin{tikzpicture}[x=5mm, y=5mm]\draw(0,5)node{};\draw(0,-5)node{};\draw(0,0)node{\gt{イ}};\end{tikzpicture} &
+        \begin{tikzpicture}[x=5mm, y=5mm]
+            \draw (-5,0)--(5,0) node[right]{$x$}; \draw (0,-5)--(0,5) node[above]{$y$}; \draw (0,0) node[above left]{O};
+            \draw[samples=100, domain=-4.7:3.7, dashed] plot(\x, -\x-1);
+            \draw[samples=100, domain=-3.7:4.7, dashed] plot(\x, \x-1);
+            \draw[semithick, samples=100, domain=-3:2] plot(\x, -2*\x-1);
+        \end{tikzpicture} \\\hline
+        \begin{tikzpicture}[x=5mm, y=5mm]\draw(0,5)node{};\draw(0,-5)node{};\draw(0,0)node{\gt{ウ}};\end{tikzpicture} &
+        \begin{tikzpicture}[x=5mm, y=5mm]
+            \draw (-5,0)--(5,0) node[right]{$x$}; \draw (0,-5)--(0,5) node[above]{$y$}; \draw (0,0) node[above left]{O};
+            \draw[samples=100, domain=-4.7:3.7, dashed] plot(\x, -\x-1);
+            \draw[samples=100, domain=-3.7:4.7, dashed] plot(\x, \x-1);
+            \draw[semithick, samples=100, domain=-2:3] plot(\x, 2*\x-1);
+        \end{tikzpicture} &
+        \begin{tikzpicture}[x=5mm, y=5mm]\draw(0,5)node{};\draw(0,-5)node{};\draw(0,0)node{\gt{エ}};\end{tikzpicture} &
+        \begin{tikzpicture}[x=5mm, y=5mm]
+            \draw (-5,0)--(5,0) node[right]{$x$}; \draw (0,-5)--(0,5) node[above]{$y$}; \draw (0,0) node[above left]{O};
+            \draw[samples=100, domain=-4.7:3.7, dashed] plot(\x, -\x-1);
+            \draw[samples=100, domain=-3.7:4.7, dashed] plot(\x, \x-1);
+            \draw[semithick, samples=100, domain=-5:5] plot(\x, \x/2-1);
+        \end{tikzpicture} \\\hline
+    \end{tabular}
+\end{table}
+\ans
+\newpage
+
+%
+% === 14 ===
+%
+\attr{0}{1}{1}
+\toi 次の\atoe のグラフのうち，関数の定義に照らして，「$y$ は $x$ の関数である」と\gt{\kenten{いえないもの}}を\gt{\kenten{一つ}}選んでください。\par
+\begin{table}[h]
+    \begin{tabular}{|c|c||c|c|}
+        \hline
+        \begin{tikzpicture}[x=8mm, y=8mm]\draw(0,3)node{};\draw(0,-3)node{};\draw(0,0)node{\gt{ア}};\end{tikzpicture} &
+        \begin{tikzpicture}[x=8mm, y=8mm]
+            \draw (-3,0)--(3,0) node[right]{$x$}; \draw (0,-3)--(0,3) node[above]{$y$}; \draw (0,0) node[below right]{O};
+            \draw[semithick, samples=100, domain=-1.82:3] plot(\x, {4*log10(\x+2)});
+        \end{tikzpicture} &
+        \begin{tikzpicture}[x=8mm, y=8mm]\draw(0,3)node{};\draw(0,-3)node{};\draw(0,0)node{\gt{イ}};\end{tikzpicture} & 
+        \begin{tikzpicture}[x=8mm, y=8mm]
+            \draw (-3,0)--(3,0) node[right]{$x$}; \draw (0,-3)--(0,3) node[above]{$y$}; \draw (0,0) node[below right]{O};
+            \draw[semithick, samples=100, domain=-3:0] plot(\x, -\x/2+1);
+            \draw[semithick, samples=100, domain=0:3] plot(\x, {-(\x-1)*(\x-1)+2});
+        \end{tikzpicture}\\ \hline
+        \begin{tikzpicture}[x=8mm, y=8mm]\draw(0,3)node{};\draw(0,-3)node{};\draw(0,0)node{\gt{ウ}};\end{tikzpicture} &
+        \begin{tikzpicture}[x=8mm, y=8mm]
+            \draw (-3,0)--(3,0) node[right]{$x$}; \draw (0,-3)--(0,3) node[above]{$y$}; \draw (0,0) node[below right]{O};
+            \draw[semithick, samples=100, domain=-2.8:2.87] plot(\x, {exp(\x)/2-\x-3});
+        \end{tikzpicture} &
+        \begin{tikzpicture}[x=8mm, y=8mm]\draw(0,3)node{};\draw(0,-3)node{};\draw(0,0)node{\gt{エ}};\end{tikzpicture} & 
+        \begin{tikzpicture}[x=8mm, y=8mm]
+            \draw (-3,0)--(3,0) node[right]{$x$}; \draw (0,-3)--(0,3) node[above]{$y$}; \draw (0,0) node[below right]{O};
+            \draw[semithick, samples=100, domain=-1:1.1] plot(\x, {sqrt(\x+1)-1});
+            \draw[semithick, samples=100, domain=-1:3] plot(\x, {-sqrt(\x+1)-1});
+            \draw[semithick, samples=100, domain=-3:1.1] plot(\x, -\x/2+1);
+        \end{tikzpicture}\\ \hline
+    \end{tabular}
+\end{table}
+\ans
+
+
+\end{document}
